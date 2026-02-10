@@ -71,45 +71,93 @@ export default function CheckoutPage() {
                 <CardTitle>Order Summary</CardTitle>
               </CardHeader>
               <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Item</TableHead>
-                      <TableHead className="text-center">Qty</TableHead>
-                      <TableHead className="text-right">Price</TableHead>
-                      <TableHead className="text-right">Total</TableHead>
-                      <TableHead></TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {items.map((item) => (
-                      <TableRow key={item.id}>
-                        <TableCell className="font-medium">
-                          <div className="space-y-1">
-                            <p>
-                              {item.brand} {item.discount}
-                            </p>
-                            <p className="text-xs text-muted-foreground">{item.description}</p>
-                          </div>
-                        </TableCell>
-                        <TableCell className="text-center">{item.quantity}</TableCell>
-                        <TableCell className="text-right">₹{item.price}</TableCell>
-                        <TableCell className="text-right font-medium">₹{item.price * item.quantity}</TableCell>
-                        <TableCell>
-                          <Button variant="ghost" size="icon" onClick={() => removeItem(item.id)}>
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </TableCell>
+                <div className="space-y-4 md:hidden">
+                  {items.map((item) => (
+                    <div key={item.id} className="rounded-lg border p-4">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="space-y-1">
+                          <p className="font-semibold">
+                            {item.brand} {item.discount}
+                          </p>
+                          <p className="text-xs text-muted-foreground">{item.description}</p>
+                        </div>
+                        <Button variant="ghost" size="icon" onClick={() => removeItem(item.id)}>
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                      <div className="mt-3 grid grid-cols-3 gap-2 text-sm">
+                        <div>
+                          <p className="text-xs text-muted-foreground">Qty</p>
+                          <p className="font-semibold">{item.quantity}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-muted-foreground">Price</p>
+                          <p className="font-semibold">₹{item.price}</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-xs text-muted-foreground">Total</p>
+                          <p className="font-semibold">₹{item.price * item.quantity}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="hidden md:block">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Item</TableHead>
+                        <TableHead className="text-center">Qty</TableHead>
+                        <TableHead className="text-right">Price</TableHead>
+                        <TableHead className="text-right">Total</TableHead>
+                        <TableHead></TableHead>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                    </TableHeader>
+                    <TableBody>
+                      {items.map((item) => (
+                        <TableRow key={item.id}>
+                          <TableCell className="font-medium">
+                            <div className="space-y-1">
+                              <p>
+                                {item.brand} {item.discount}
+                              </p>
+                              <p className="text-xs text-muted-foreground">{item.description}</p>
+                            </div>
+                          </TableCell>
+                          <TableCell className="text-center">{item.quantity}</TableCell>
+                          <TableCell className="text-right">₹{item.price}</TableCell>
+                          <TableCell className="text-right font-medium">₹{item.price * item.quantity}</TableCell>
+                          <TableCell>
+                            <Button variant="ghost" size="icon" onClick={() => removeItem(item.id)}>
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
 
                 <div className="mt-6 pt-6 border-t space-y-2">
                   <div className="flex justify-between text-lg font-bold">
                     <span>Total</span>
                     <span className="text-primary">₹{totalPrice}</span>
                   </div>
+                </div>
+
+                <div className="mt-6 rounded-lg border border-amber-200 bg-amber-50 p-4 text-amber-950">
+                  <p className="font-semibold">Please read carefully</p>
+                  <ul className="mt-3 list-disc space-y-2 pl-5 text-sm">
+                    <li>✅ All coupons are 100% live checked in Sheinverse before being sent.</li>
+                    <li>❌ No refund and no replacement. This policy is strict.</li>
+                    <li>🚫 Do not buy coupons to store for later use.</li>
+                    <li>⚠️ These vouchers are constantly targeted by auto scrapers every second.</li>
+                    <li>✅ Use the code immediately after receiving it.</li>
+                    <li>⛔ Any delay may result in the code showing used or not applicable.</li>
+                    <li>⚠️ Purchase only if you agree to all terms.</li>
+                    <li>🛑 Buy at your own risk.</li>
+                  </ul>
                 </div>
               </CardContent>
             </Card>
