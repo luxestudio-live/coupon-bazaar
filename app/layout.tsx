@@ -9,7 +9,7 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "CouponBazaar - Buy Verified Coupons Instantly",
+  title: "ShopEase By TryLooters - Buy Verified Coupons Instantly",
   description:
     "Get instant access to verified discount coupons with Razorpay payment. 1000+ coupons sold, instant delivery guaranteed.",
   icons: {

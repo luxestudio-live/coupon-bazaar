@@ -61,8 +61,8 @@ export default function MaintenancePage() {
             </p>
             <div className="space-y-1">
               <p className="text-sm">
-                📧 <a href="mailto:hello@luxestudio.live" className="text-primary hover:underline">
-                  hello@luxestudio.live
+                📧 <a href="mailto:hello@trylooters.in" className="text-primary hover:underline">
+                  hello@trylooters.in
                 </a>
                 <br />
                 📞 <a href="tel:+919987031290" className="text-primary hover:underline">

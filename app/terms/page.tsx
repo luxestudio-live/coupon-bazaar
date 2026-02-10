@@ -18,13 +18,13 @@ export default function TermsPage() {
             </CardHeader>
             <CardContent className="space-y-4 text-muted-foreground">
               <p>
-                By accessing and using CouponBazaar, you accept and agree to be bound by the terms and provision 
+                By accessing and using ShopEase By TryLooters, you accept and agree to be bound by the terms and provision 
                 of this agreement. If you do not agree to these terms, please do not use our service.
               </p>
               <div className="p-4 bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg mt-4">
                 <h3 className="font-semibold text-foreground mb-2">Third-Party Seller Disclosure</h3>
                 <p className="text-sm">
-                  CouponBazaar is an <strong>independent third-party seller</strong> and reseller of discount coupon codes. 
+                  ShopEase By TryLooters is an <strong>independent third-party seller</strong> and reseller of discount coupon codes. 
                   We are <strong>not affiliated with, endorsed by, or directly connected to any of the brands</strong> whose 
                   coupon codes we sell. We obtain coupon codes through legitimate channels and resell them to customers. 
                   All brand names, logos, and trademarks mentioned on this platform belong to their respective owners. 
@@ -40,7 +40,7 @@ export default function TermsPage() {
             </CardHeader>
             <CardContent className="space-y-4 text-muted-foreground">
               <p>
-                CouponBazaar provides a platform for purchasing verified discount coupon codes. You agree to:
+                ShopEase By TryLooters provides a platform for purchasing verified discount coupon codes. You agree to:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>Provide accurate payment and contact information</li>
@@ -58,7 +58,7 @@ export default function TermsPage() {
             </CardHeader>
             <CardContent className="space-y-4 text-muted-foreground">
               <p>
-                <strong>CouponBazaar operates as an independent third-party reseller.</strong> We source and resell 
+                <strong>ShopEase By TryLooters operates as an independent third-party reseller.</strong> We source and resell 
                 discount coupon codes obtained through legitimate channels. We strive to ensure all coupon codes 
                 listed on our platform are:
               </p>
@@ -98,8 +98,8 @@ export default function TermsPage() {
             </CardHeader>
             <CardContent className="space-y-4 text-muted-foreground">
               <p>
-                All content on CouponBazaar, including but not limited to text, graphics, logos, and software, 
-                is the property of CouponBazaar or its content suppliers and is protected by intellectual property laws.
+                All content on ShopEase By TryLooters, including but not limited to text, graphics, logos, and software, 
+                is the property of ShopEase By TryLooters or its content suppliers and is protected by intellectual property laws.
               </p>
             </CardContent>
           </Card>
@@ -110,7 +110,7 @@ export default function TermsPage() {
             </CardHeader>
             <CardContent className="space-y-4 text-muted-foreground">
               <p>
-                CouponBazaar shall not be liable for:
+                ShopEase By TryLooters shall not be liable for:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>Rejection of coupon codes by merchants due to their internal policies</li>
@@ -127,7 +127,7 @@ export default function TermsPage() {
             </CardHeader>
             <CardContent className="space-y-4 text-muted-foreground">
               <p>
-                Your use of CouponBazaar is also governed by our Privacy Policy. Please review our Privacy Policy 
+                Your use of ShopEase By TryLooters is also governed by our Privacy Policy. Please review our Privacy Policy 
                 to understand our practices regarding your personal information.
               </p>
             </CardContent>
@@ -154,7 +154,7 @@ export default function TermsPage() {
                 For any questions regarding these terms, please contact us at:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
-                <li>Email: hello@luxestudio.live</li>
+                <li>Email: hello@trylooters.in</li>
                 <li>Phone: +91 9987031290</li>
                 <li>Instagram: <a href="https://instagram.com/Trylooters" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@Trylooters</a></li>
               </ul>

@@ -109,7 +109,7 @@ export default function RefundPolicyPage() {
               <div>
                 <h3 className="font-semibold text-foreground mb-2">How to Request a Refund</h3>
                 <ol className="list-decimal list-inside space-y-2 ml-4">
-                  <li>Contact our support team via email (hello@luxestudio.live), phone (+91 9987031290), or Instagram (@Trylooters)</li>
+                  <li>Contact our support team via email (hello@trylooters.in), phone (+91 9987031290), or Instagram (@Trylooters)</li>
                   <li>Provide your order ID and payment transaction details</li>
                   <li>Explain the reason for refund with supporting evidence if applicable</li>
                   <li>Our team will review your request within 24-48 hours</li>
@@ -149,7 +149,7 @@ export default function RefundPolicyPage() {
             <CardContent className="space-y-4 text-muted-foreground">
               <p>
                 We are committed to resolving any issues fairly. If you are not satisfied with our response to 
-                your refund request, you may escalate the matter by emailing us at hello@luxestudio.live with 
+                your refund request, you may escalate the matter by emailing us at hello@trylooters.in with 
                 "ESCALATION" in the subject line.
               </p>
               <p>

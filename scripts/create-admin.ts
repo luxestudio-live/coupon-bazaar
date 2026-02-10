@@ -1,21 +1,37 @@
 import { initializeApp } from "firebase/app"
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
+import { firebaseConfig as config, adminConfig, validateEnv } from "../lib/env"
 
+// Load environment variables
 const firebaseConfig = {
-  apiKey: "AIzaSyC-YrD9kmIkJjM0qUPK33RFAx3Vci0Poj4",
-  authDomain: "coupon-duniya.firebaseapp.com",
-  projectId: "coupon-duniya",
-  storageBucket: "coupon-duniya.firebasestorage.app",
-  messagingSenderId: "765658846291",
-  appId: "1:765658846291:web:828f7157f3a00b8db5e2a6",
-  measurementId: "G-676NEV4JCN",
+  apiKey: config.apiKey,
+  authDomain: config.authDomain,
+  projectId: config.projectId,
+  storageBucket: config.storageBucket,
+  messagingSenderId: config.messagingSenderId,
+  appId: config.appId,
+  measurementId: config.measurementId,
+}
+
+// Validate required environment variables
+try {
+  validateEnv()
+  if (!adminConfig.email || !adminConfig.password) {
+    throw new Error("ADMIN_EMAIL and ADMIN_PASSWORD are required")
+  }
+} catch (error) {
+  console.error("❌ Configuration Error:")
+  console.error(error instanceof Error ? error.message : error)
+  console.error("\nPlease create a .env.local file with all required variables.")
+  console.error("See .env.local.example for reference.")
+  process.exit(1)
 }
 
 const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 
-const ADMIN_EMAIL = "admin@couponduniya.in"
-const ADMIN_PASSWORD = "Admin@LuxeStudio@23"
+const ADMIN_EMAIL = adminConfig.email!
+const ADMIN_PASSWORD = adminConfig.password!
 
 async function createAdminUser() {
   try {

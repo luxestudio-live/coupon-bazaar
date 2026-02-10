@@ -13,12 +13,17 @@ import { useOrder } from "@/hooks/use-order"
 
 export default function CheckoutPage() {
   const router = useRouter()
-  const { items, removeItem, getTotalPrice } = useCart()
+  const { items, removeItem, getTotalPrice, clearCart } = useCart()
   const totalPrice = getTotalPrice()
 
-  const handlePaymentInitiated = (paymentLinkId: string) => {
-    console.log("Payment initiated with link ID:", paymentLinkId)
-    // Payment link redirect will happen automatically
+  const handlePaymentInitiated = (orderId: string) => {
+    console.log("Payment initiated with order ID:", orderId)
+    // Payment will be handled by Razorpay checkout modal
+  }
+
+  const handlePaymentSuccess = () => {
+    console.log("Payment successful, clearing cart")
+    clearCart()
   }
 
   if (items.length === 0) {
@@ -112,7 +117,12 @@ export default function CheckoutPage() {
 
           {/* Payment Section */}
           <div>
-            <RazorpayPayment amount={totalPrice} items={items} onPaymentInitiated={handlePaymentInitiated} />
+            <RazorpayPayment 
+              amount={totalPrice} 
+              items={items} 
+              onPaymentInitiated={handlePaymentInitiated}
+              onSuccess={handlePaymentSuccess}
+            />
           </div>
         </div>
       </main>

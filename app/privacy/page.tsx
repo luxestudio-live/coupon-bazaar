@@ -18,13 +18,13 @@ export default function PrivacyPolicyPage() {
             </CardHeader>
             <CardContent className="space-y-4 text-muted-foreground">
               <p>
-                CouponBazaar ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy 
+                ShopEase By TryLooters ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy 
                 explains how we collect, use, disclose, and safeguard your information when you use our service.
               </p>
               <div className="p-4 bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg mt-4">
                 <h3 className="font-semibold text-foreground mb-2">About Our Service</h3>
                 <p className="text-sm">
-                  CouponBazaar operates as an <strong>independent third-party seller and reseller</strong> of discount 
+                  ShopEase By TryLooters operates as an <strong>independent third-party seller and reseller</strong> of discount 
                   coupon codes. We are <strong>not affiliated with, endorsed by, or directly connected to any of the brands</strong> 
                   whose coupon codes we offer. We source codes through legitimate channels and resell them to customers. 
                   All brand names and trademarks belong to their respective owners.
@@ -200,7 +200,7 @@ export default function PrivacyPolicyPage() {
                 If you have any questions about this Privacy Policy, please contact us:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
-                <li>Email: hello@luxestudio.live</li>
+                <li>Email: hello@trylooters.in</li>
                 <li>Phone: +91 9987031290</li>
                 <li>Instagram: <a href="https://instagram.com/Trylooters" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@Trylooters</a></li>
               </ul>

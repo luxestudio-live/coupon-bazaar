@@ -29,54 +29,77 @@ export function CouponCard({ coupon }: CouponCardProps) {
   const isLowStock = coupon.stock < 10
 
   return (
-    <Card className="overflow-hidden transition-all hover:shadow-lg">
-      <div className="p-4 pb-0 flex items-center justify-between">
-        <div className="flex-1" />
+    <Card className="group overflow-hidden transition-all hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 border-2 hover:border-primary/20">
+      {/* Header with badge */}
+      <div className="p-5 pb-0 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+          <span className="text-xs font-medium text-green-600">Available</span>
+        </div>
         {isLowStock && (
-          <Badge variant="destructive" className="gap-1">
+          <Badge variant="destructive" className="gap-1 animate-pulse">
             🔥 Low Stock
           </Badge>
         )}
       </div>
 
-      <CardContent className="p-4">
-        <h3 className="font-semibold text-lg mb-1 text-balance">
-          {coupon.brand} {coupon.discount}
-        </h3>
-        <p className="text-sm text-muted-foreground mb-3">{coupon.description}</p>
-        <div className="flex items-center justify-between">
+      <CardContent className="p-5 space-y-4">
+        {/* Title */}
+        <div>
+          <h3 className="font-bold text-xl mb-1 text-balance group-hover:text-primary transition-colors">
+            {coupon.brand}
+          </h3>
+          <p className="text-base font-semibold text-muted-foreground">
+            {coupon.discount}
+          </p>
+        </div>
+        
+        {/* Description */}
+        <p className="text-sm text-muted-foreground line-clamp-2">
+          {coupon.description}
+        </p>
+        
+        {/* Price and Stock */}
+        <div className="flex items-end justify-between pt-2 border-t">
           <div>
-            <p className="text-2xl font-bold text-primary">₹{coupon.price}</p>
-            <p className="text-xs text-muted-foreground">per coupon</p>
+            <p className="text-xs text-muted-foreground mb-1">Price</p>
+            <p className="text-3xl font-bold bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
+              ₹{coupon.price}
+            </p>
           </div>
           <div className="text-right">
-            <p className="text-sm font-medium">{coupon.stock} left</p>
-            <p className="text-xs text-muted-foreground">in stock</p>
+            <p className="text-xs text-muted-foreground mb-1">In Stock</p>
+            <p className="text-lg font-bold">{coupon.stock}</p>
           </div>
         </div>
       </CardContent>
 
-      <CardFooter className="p-4 pt-0 flex gap-2">
-        <div className="flex items-center border rounded-md">
+      <CardFooter className="p-5 pt-0 flex gap-3">
+        <div className="flex items-center border-2 rounded-lg bg-muted/30">
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8"
+            className="h-9 w-9 hover:bg-primary/10 hover:text-primary"
             onClick={() => setQuantity(Math.max(1, quantity - 1))}
           >
-            <Minus className="h-3 w-3" />
+            <Minus className="h-4 w-4" />
           </Button>
-          <span className="w-10 text-center text-sm font-medium">{quantity}</span>
+          <span className="w-12 text-center text-sm font-bold">{quantity}</span>
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8"
+            className="h-9 w-9 hover:bg-primary/10 hover:text-primary"
             onClick={() => setQuantity(Math.min(50, quantity + 1))}
           >
-            <Plus className="h-3 w-3" />
+            <Plus className="h-4 w-4" />
           </Button>
         </div>
-        <Button onClick={handleAddToCart} className="flex-1 gap-2" disabled={coupon.stock === 0}>
+        <Button 
+          onClick={handleAddToCart} 
+          className="flex-1 gap-2 font-semibold shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30" 
+          disabled={coupon.stock === 0}
+          size="lg"
+        >
           <ShoppingCart className="h-4 w-4" />
           Add to Cart
         </Button>

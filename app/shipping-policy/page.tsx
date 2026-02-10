@@ -18,7 +18,7 @@ export default function ShippingPolicyPage() {
             </CardHeader>
             <CardContent className="space-y-4 text-muted-foreground">
               <p>
-                CouponBazaar is a digital marketplace that exclusively deals in digital coupon codes. 
+                ShopEase By TryLooters is a digital marketplace that exclusively deals in digital coupon codes. 
                 Since all our products are digital, there is <strong>no physical shipping</strong> involved.
               </p>
             </CardContent>
@@ -75,7 +75,7 @@ export default function ShippingPolicyPage() {
                 our support team immediately at:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
-                <li>Email: hello@luxestudio.live</li>
+                <li>Email: hello@trylooters.in</li>
                 <li>Phone: +91 9987031290</li>
                 <li>Instagram: <a href="https://instagram.com/Trylooters" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@Trylooters</a></li>
               </ul>

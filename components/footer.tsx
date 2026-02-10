@@ -10,7 +10,7 @@ export function Footer() {
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2 font-bold text-xl">
               <Ticket className="h-6 w-6 text-primary" />
-              <span>CouponBazaar</span>
+              <span>ShopEase</span>
             </Link>
             <p className="text-sm text-muted-foreground">
               Your trusted destination for verified discount coupons. Save more on every purchase.
@@ -67,8 +67,8 @@ export function Footer() {
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4" />
-                <a href="mailto:hello@luxestudio.live" className="hover:text-primary transition-colors">
-                  hello@luxestudio.live
+                <a href="mailto:hello@trylooters.in" className="hover:text-primary transition-colors">
+                  hello@trylooters.in
                 </a>
               </li>
               <li className="flex items-center gap-2">
@@ -88,7 +88,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-            <p>© {new Date().getFullYear()} CouponBazaar. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} ShopEase By TryLooters. All rights reserved.</p>
             <p className="text-center">
               Dreamed, designed, and brought to life by{" "}
               <a 

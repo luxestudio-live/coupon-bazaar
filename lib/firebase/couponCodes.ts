@@ -30,10 +30,38 @@ export interface CouponCode {
 // Add multiple coupon codes for a coupon
 export const addCouponCodes = async (couponId: string, codes: string[]) => {
   try {
+    // Check for duplicates within the new codes array
+    const uniqueCodes = [...new Set(codes.map(c => c.trim()))]
+    
+    if (uniqueCodes.length !== codes.length) {
+      return { error: "Duplicate codes detected in your input. Please remove duplicates." }
+    }
+    
+    // Check for existing codes in database
+    const existingCodesQuery = query(
+      collection(db, COUPON_CODES_COLLECTION),
+      where("couponId", "==", couponId)
+    )
+    const existingSnapshot = await getDocs(existingCodesQuery)
+    const existingCodes = new Set<string>()
+    existingSnapshot.forEach(doc => {
+      existingCodes.add(doc.data().code.trim().toLowerCase())
+    })
+    
+    const duplicates = uniqueCodes.filter(code => 
+      existingCodes.has(code.toLowerCase())
+    )
+    
+    if (duplicates.length > 0) {
+      return { 
+        error: `${duplicates.length} code(s) already exist: ${duplicates.slice(0, 3).join(", ")}${duplicates.length > 3 ? "..." : ""}`
+      }
+    }
+    
     const batch = writeBatch(db)
     const codesCollection = collection(db, COUPON_CODES_COLLECTION)
     
-    codes.forEach((code) => {
+    uniqueCodes.forEach((code) => {
       const docRef = doc(codesCollection)
       batch.set(docRef, {
         couponId,
