@@ -33,8 +33,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if payment has already been processed (prevent duplicate submissions)
-    const ordersRef = collection(db, "orders")
-    const existingOrderQuery = query(ordersRef, where("paymentId", "==", razorpay_payment_id))
+    const ordersCollection = collection(db, "orders")
+    const existingOrderQuery = query(ordersCollection, where("paymentId", "==", razorpay_payment_id))
     const existingOrders = await getDocs(existingOrderQuery)
 
     if (!existingOrders.empty) {
