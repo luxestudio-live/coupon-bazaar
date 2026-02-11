@@ -24,9 +24,34 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Payment gateway not configured" }, { status: 500 })
     }
 
+    // Calculate total amount from database prices (security: prevent client price manipulation)
+    let calculatedAmount = 0
+
+    for (const item of items) {
+      const { couponId, quantity } = item
+
+      if (!couponId || !quantity) {
+        return NextResponse.json({ error: "Invalid item data" }, { status: 400 })
+      }
+
+      // Fetch actual price from database
+      const couponDoc = await getDoc(doc(db, "coupons", couponId))
+      
+      if (!couponDoc.exists()) {
+        return NextResponse.json({ error: `Coupon not found: ${couponId}` }, { status: 404 })
+      }
+
+      const couponData = couponDoc.data()
+      const actualPrice = couponData.price
+      
+      calculatedAmount += actualPrice * quantity
+    }
+
+    console.log("Calculated amount from database:", calculatedAmount)
+
     // Create Razorpay order
     const orderOptions = {
-      amount: amount * 100, // Convert to paise
+      amount: calculatedAmount * 100, // Convert to paise
       currency: "INR",
       receipt: `order_${Date.now()}`,
       notes: {
