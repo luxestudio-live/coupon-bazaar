@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useCart } from "@/lib/cart"
 import { useToast } from "@/hooks/use-toast"
-import type { Order } from "@/hooks/use-order"
+import type { Order } from "@/types/order"
 
 export default function SuccessPage() {
   const params = useParams()

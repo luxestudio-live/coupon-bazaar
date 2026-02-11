@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import { Header } from "@/components/header"
 import { CouponCard } from "@/components/coupon-card"
 import { TrustBadges } from "@/components/trust-badges"
-import { WhatsAppButton } from "@/components/whatsapp-button"
 import type { Coupon } from "@/lib/cart"
 
 export default function Home() {
@@ -70,6 +69,59 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Sheinverse Links */}
+        <section className="container mx-auto px-4 py-10 md:py-12">
+          <div className="relative overflow-hidden rounded-2xl border bg-gradient-to-br from-slate-50 via-white to-blue-50 p-6 md:p-8">
+            <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-blue-200/40 blur-3xl" />
+            <div className="absolute -bottom-12 -left-12 h-40 w-40 rounded-full bg-primary/10 blur-3xl" />
+
+            <div className="relative grid gap-6 md:grid-cols-[1.2fr_1fr] md:items-center">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-wider text-primary">Sheinverse product link</p>
+                <h2 className="mt-2 text-2xl md:text-3xl font-bold text-balance">
+                  Official Sheinverse link
+                </h2>
+                <p className="mt-3 text-sm md:text-base text-muted-foreground">
+                  Use the main link for the fastest access. If it doesn’t open, try the alternate link below.
+                </p>
+              </div>
+
+              <div className="grid gap-3">
+                <a
+                  href="https://openinapp.link/8srdq"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between rounded-xl border bg-white px-4 py-3 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                >
+                  <span className="font-semibold">Main Link</span>
+                  <span className="text-sm text-primary group-hover:underline">Open →</span>
+                </a>
+                <a
+                  href="https://bitli.in/Qb6qEHk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between rounded-xl border bg-white px-4 py-3 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                >
+                  <span className="font-semibold">Alternate Link</span>
+                  <span className="text-sm text-primary group-hover:underline">Open →</span>
+                </a>
+                <a
+                  href="https://t.me/DealShein"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between rounded-xl border bg-primary/5 px-4 py-3 transition hover:bg-primary/10"
+                >
+                  <span className="font-semibold">Latest stock alerts</span>
+                  <span className="text-sm text-primary group-hover:underline">Join →</span>
+                </a>
+                <p className="text-xs text-muted-foreground">
+                  Get minute-to-minute updates and restock alerts on Telegram.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Coupons Section */}
         <section className="container mx-auto px-4 py-12 md:py-16">
           <div className="flex items-center justify-between mb-8">
@@ -111,7 +163,6 @@ export default function Home() {
         </section>
       </main>
 
-      <WhatsAppButton />
     </div>
   )
 }

@@ -64,10 +64,6 @@ export default function MaintenancePage() {
                 📧 <a href="mailto:hello@trylooters.in" className="text-primary hover:underline">
                   hello@trylooters.in
                 </a>
-                <br />
-                📞 <a href="tel:+919987031290" className="text-primary hover:underline">
-                  +91 9987031290
-                </a>
               </p>
               <p className="text-sm">
                 📱 <a href="https://instagram.com/Trylooters" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">

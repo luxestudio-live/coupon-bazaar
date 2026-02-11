@@ -1,0 +1,36 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Coupons: Public read, authenticated write
+    match /coupons/{coupon} {
+      allow read: if true;  // Anyone can read coupons (for website visitors)
+      allow create, update, delete: if request.auth != null;  // Only logged-in admins can modify
+    }
+    
+    // Brands: Authenticated users only
+    match /brands/{brand} {
+      allow read: if request.auth != null;  // Only logged-in admins can see brands
+      allow create, update, delete: if request.auth != null;  // Only logged-in admins can modify
+    }
+    
+    // Coupon Codes: Read for availability check, write only by server/admin
+    match /couponCodes/{code} {
+      allow read: if true;  // Allow reading to check availability
+      allow create, delete: if request.auth != null;  // Only admin can add/remove codes
+      allow update: if false;  // ✅ BLOCK client updates - only server can mark as used!
+    }
+    
+    // Pending Orders: Server-side only (prevent client manipulation)
+    match /pendingOrders/{order} {
+      allow read: if false;  // Block all client reads
+      allow write: if false;  // Block all client writes - server only!
+    }
+    
+    // Orders: Server-side write ONLY, block all client access
+    match /orders/{order} {
+      allow read: if false;  // ✅ BLOCK - prevent reading other people's orders and coupon codes!
+      allow write: if false;  // Only server can create orders
+    }
+  }
+}

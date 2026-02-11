@@ -1,26 +1,63 @@
 import Link from "next/link"
-import { Ticket, Mail, Phone } from "lucide-react"
+import { Ticket, Mail, Instagram, Send, Youtube } from "lucide-react"
 
 export function Footer() {
   return (
-    <footer className="border-t bg-background">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* Brand Section */}
-          <div className="space-y-4">
-            <Link href="/" className="flex items-center gap-2 font-bold text-xl">
-              <Ticket className="h-6 w-6 text-primary" />
-              <span>ShopEase</span>
+    <footer className="relative overflow-hidden border-t bg-gradient-to-b from-slate-50 via-white to-blue-50">
+      <div className="absolute -top-24 -right-24 h-56 w-56 rounded-full bg-primary/10 blur-3xl" />
+      <div className="absolute -bottom-24 -left-24 h-56 w-56 rounded-full bg-blue-500/10 blur-3xl" />
+
+      <div className="container relative mx-auto px-4 py-14">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
+          {/* Brand */}
+          <div className="md:col-span-5 space-y-4">
+            <Link href="/" className="flex items-center gap-3">
+              <div className="rounded-lg bg-gradient-to-br from-primary to-blue-600 p-2 shadow-lg">
+                <Ticket className="h-6 w-6 text-white" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-xl font-bold">ShopEase</span>
+                <span className="text-xs font-medium text-muted-foreground -mt-1">By TryLooters</span>
+              </div>
             </Link>
-            <p className="text-sm text-muted-foreground">
-              Your trusted destination for verified discount coupons. Save more on every purchase.
+            <p className="text-sm text-muted-foreground max-w-sm">
+              Verified coupons, instant delivery, and transparent policies. Save more with confidence.
             </p>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="https://instagram.com/Trylooters"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border bg-white px-3 py-2 text-sm font-medium shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <Instagram className="h-4 w-4 text-pink-600" />
+                Instagram
+              </a>
+              <a
+                href="https://t.me/Trylooters"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border bg-white px-3 py-2 text-sm font-medium shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <Send className="h-4 w-4 text-sky-600" />
+                Telegram
+              </a>
+              <a
+                href="https://youtube.com/@trylooters"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border bg-white px-3 py-2 text-sm font-medium shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              >
+                <Youtube className="h-4 w-4 text-red-600" />
+                YouTube
+              </a>
+            </div>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+          <div className="md:col-span-3">
+            <p className="text-sm font-semibold uppercase tracking-wider text-primary">Quick Links</p>
+            <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
               <li>
                 <Link href="/" className="hover:text-primary transition-colors">
                   Home
@@ -35,9 +72,9 @@ export function Footer() {
           </div>
 
           {/* Policies */}
-          <div>
-            <h3 className="font-semibold mb-4">Policies</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+          <div className="md:col-span-2">
+            <p className="text-sm font-semibold uppercase tracking-wider text-primary">Policies</p>
+            <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
               <li>
                 <Link href="/terms" className="hover:text-primary transition-colors">
                   Terms & Conditions
@@ -62,38 +99,27 @@ export function Footer() {
           </div>
 
           {/* Contact */}
-          <div>
-            <h3 className="font-semibold mb-4">Contact</h3>
-            <ul className="space-y-3 text-sm text-muted-foreground">
+          <div className="md:col-span-2">
+            <p className="text-sm font-semibold uppercase tracking-wider text-primary">Contact</p>
+            <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4" />
                 <a href="mailto:hello@trylooters.in" className="hover:text-primary transition-colors">
                   hello@trylooters.in
                 </a>
               </li>
-              <li className="flex items-center gap-2">
-                <span className="font-semibold">Social:</span>
-                <a href="https://instagram.com/Trylooters" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-                  Instagram
-                </a>
-                <span>|</span>
-                <a href="https://t.me/Trylooters" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-                  Telegram
-                </a>
-              </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 border-t">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
+        <div className="mt-10 border-t pt-6 text-sm text-muted-foreground">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <p>© {new Date().getFullYear()} ShopEase By TryLooters. All rights reserved.</p>
             <p className="text-center">
               Dreamed, designed, and brought to life by{" "}
-              <a 
-                href="https://www.luxestudio.live" 
-                target="_blank" 
+              <a
+                href="https://www.luxestudio.live"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="font-semibold text-primary hover:underline transition-colors"
               >

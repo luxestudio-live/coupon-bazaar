@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useCart } from "@/lib/cart"
-import { useOrder } from "@/hooks/use-order"
 
 export default function CheckoutPage() {
   const router = useRouter()
@@ -147,16 +146,16 @@ export default function CheckoutPage() {
                 </div>
 
                 <div className="mt-6 rounded-lg border border-amber-200 bg-amber-50 p-4 text-amber-950">
-                  <p className="font-semibold">Please read carefully</p>
+                  <p className="font-semibold">⚠️ Please read carefully</p>
                   <ul className="mt-3 list-disc space-y-2 pl-5 text-sm">
-                    <li>✅ All coupons are 100% live checked in Sheinverse before being sent.</li>
-                    <li>❌ No refund and no replacement. This policy is strict.</li>
-                    <li>🚫 Do not buy coupons to store for later use.</li>
-                    <li>⚠️ These vouchers are constantly targeted by auto scrapers every second.</li>
-                    <li>✅ Use the code immediately after receiving it.</li>
-                    <li>⛔ Any delay may result in the code showing used or not applicable.</li>
-                    <li>⚠️ Purchase only if you agree to all terms.</li>
-                    <li>🛑 Buy at your own risk.</li>
+                    <li>✅ All coupons are 100% live and verified on Sheinverse before being shared.</li>
+                    <li>❌ No refund or replacement is available once the coupon is delivered.</li>
+                    <li>🚫 Kindly avoid purchasing coupons for future use.</li>
+                    <li>⚠️ These vouchers are frequently targeted by automated systems.</li>
+                    <li>✅ Please use the coupon immediately after receiving it.</li>
+                    <li>⛔ Any delay may cause the code to show used or not applicable.</li>
+                    <li>⚠️ Proceed with the purchase only if you agree to these terms.</li>
+                    <li>🛑 Purchase is made at your own discretion and risk.</li>
                   </ul>
                 </div>
               </CardContent>

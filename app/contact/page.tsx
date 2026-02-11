@@ -42,7 +42,6 @@ export default function ContactPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-lg font-semibold mb-2">hello@trylooters.in</p>
-                <p className="text-lg font-semibold">+91 9987031290</p>
                 <p className="text-sm text-muted-foreground">
                   We'll respond within 24 hours
                 </p>

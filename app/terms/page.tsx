@@ -155,7 +155,6 @@ export default function TermsPage() {
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>Email: hello@trylooters.in</li>
-                <li>Phone: +91 9987031290</li>
                 <li>Instagram: <a href="https://instagram.com/Trylooters" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@Trylooters</a></li>
               </ul>
             </CardContent>

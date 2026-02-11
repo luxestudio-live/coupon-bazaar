@@ -109,7 +109,7 @@ export default function RefundPolicyPage() {
               <div>
                 <h3 className="font-semibold text-foreground mb-2">How to Request a Refund</h3>
                 <ol className="list-decimal list-inside space-y-2 ml-4">
-                  <li>Contact our support team via email (hello@trylooters.in), phone (+91 9987031290), or Instagram (@Trylooters)</li>
+                  <li>Contact our support team via email (hello@trylooters.in) or Instagram (@Trylooters)</li>
                   <li>Provide your order ID and payment transaction details</li>
                   <li>Explain the reason for refund with supporting evidence if applicable</li>
                   <li>Our team will review your request within 24-48 hours</li>

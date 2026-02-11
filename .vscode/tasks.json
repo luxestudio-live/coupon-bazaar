@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Remove phone references",
+			"type": "shell",
+			"command": "echo",
+			"args": [
+				"Removing phone references via file edits."
+			]
+		}
+	]
+}
