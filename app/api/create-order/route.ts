@@ -1,5 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 import Razorpay from "razorpay"
+import { doc, getDoc } from "firebase/firestore"
+import { db } from "@/lib/firebase"
 
 const razorpay = new Razorpay({
   key_id: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
@@ -9,13 +11,11 @@ const razorpay = new Razorpay({
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { amount, items } = body
-
-    console.log("Creating Razorpay order for amount:", amount)
+    const { items } = body
 
     // Validate request
-    if (!amount) {
-      return NextResponse.json({ error: "Missing amount" }, { status: 400 })
+    if (!items || !Array.isArray(items) || items.length === 0) {
+      return NextResponse.json({ error: "Invalid items" }, { status: 400 })
     }
 
     // Check if Razorpay credentials are configured

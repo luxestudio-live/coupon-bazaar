@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 import crypto from "crypto"
 import { getAvailableCodes, markCodesAsUsed } from "@/lib/firebase/couponCodes"
-import { collection, addDoc, Timestamp } from "firebase/firestore"
+import { collection, addDoc, Timestamp, doc, getDoc } from "firebase/firestore"
 import { db } from "@/lib/firebase"
 import Razorpay from "razorpay"
 
@@ -32,17 +32,67 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, message: "Payment verification failed" }, { status: 400 })
     }
 
-    // Payment verified successfully, now allocate coupon codes
+    // Fetch the Razorpay order to verify amount paid
+    const razorpayOrder = await razorpay.orders.fetch(razorpay_order_id)
+    const amountPaid = razorpayOrder.amount / 100 // Convert from paise to rupees
+
+    console.log("Amount paid:", amountPaid)
+
+    // Payment verified successfully, now validate items and allocate coupon codes
     if (!items || !Array.isArray(items)) {
       return NextResponse.json({ error: "Invalid items" }, { status: 400 })
+    }
+
+    // Re-calculate expected amount from database prices
+    let expectedAmount = 0
+    const validatedItems = []
+
+    for (const item of items) {
+      const { couponId, quantity } = item
+
+      if (!couponId || !quantity) {
+        return NextResponse.json({ error: "Invalid item data" }, { status: 400 })
+      }
+
+      // Fetch actual price from database
+      const couponDoc = await getDoc(doc(db, "coupons", couponId))
+      
+      if (!couponDoc.exists()) {
+        return NextResponse.json({ error: `Coupon not found: ${couponId}` }, { status: 404 })
+      }
+
+      const couponData = couponDoc.data()
+      const actualPrice = couponData.price
+      
+      expectedAmount += actualPrice * quantity
+      
+      validatedItems.push({
+        couponId,
+        quantity,
+        price: actualPrice,
+        brand: couponData.brand,
+        discount: couponData.discount,
+        description: couponData.description
+      })
+    }
+
+    console.log("Expected amount from database:", expectedAmount)
+
+    // Verify amount paid matches expected amount
+    if (Math.abs(amountPaid - expectedAmount) > 0.01) {
+      console.error(`Payment amount mismatch! Paid: ${amountPaid}, Expected: ${expectedAmount}`)
+      return NextResponse.json({ 
+        error: "Payment amount mismatch", 
+        details: { paid: amountPaid, expected: expectedAmount }
+      }, { status: 400 })
     }
 
     const allocatedItems = []
     let totalAmount = 0
 
-    // Process each coupon in the order
-    for (const item of items) {
-      const { couponId, quantity, brand, discount, price } = item
+    // Process each validated coupon in the order
+    for (const item of validatedItems) {
+      const { couponId, quantity, brand, discount, price, description } = item
 
       // Get available codes for this coupon
       const availableCodes = await getAvailableCodes(couponId, quantity)
@@ -70,11 +120,11 @@ export async function POST(request: NextRequest) {
         discount,
         quantity,
         codes: availableCodes.map(c => c.code),
-        price: price || 0,
-        description: item.description || ''
+        price,
+        description
       })
 
-      totalAmount += (price || 0) * quantity
+      totalAmount += price * quantity
     }
 
     // Fetch payment details from Razorpay to get customer info
