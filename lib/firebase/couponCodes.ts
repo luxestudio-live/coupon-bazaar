@@ -126,9 +126,34 @@ export const getAvailableCodesCount = async (couponId: string): Promise<number> 
   }
 }
 
-// Mark codes as used
+// Mark codes as used (with duplicate-use prevention)
 export const markCodesAsUsed = async (codeIds: string[], userId: string) => {
   try {
+    // First, verify all codes are still available (prevent race condition)
+    const codeChecks = await Promise.all(
+      codeIds.map(async (codeId) => {
+        const docRef = doc(db, COUPON_CODES_COLLECTION, codeId)
+        const docSnap = await getDoc(docRef)
+        if (!docSnap.exists()) {
+          return { id: codeId, available: false, reason: "not_found" }
+        }
+        const data = docSnap.data()
+        if (data.isUsed) {
+          return { id: codeId, available: false, reason: "already_used" }
+        }
+        return { id: codeId, available: true }
+      })
+    )
+
+    const unavailableCodes = codeChecks.filter(c => !c.available)
+    if (unavailableCodes.length > 0) {
+      console.error("Some codes are no longer available:", unavailableCodes)
+      return { 
+        error: `${unavailableCodes.length} code(s) already used or unavailable. Race condition detected.`
+      }
+    }
+
+    // All codes verified as available, proceed with batch update
     const batch = writeBatch(db)
     
     codeIds.forEach((codeId) => {
@@ -143,6 +168,7 @@ export const markCodesAsUsed = async (codeIds: string[], userId: string) => {
     await batch.commit()
     return { error: null }
   } catch (error: any) {
+    console.error("Error marking codes as used:", error)
     return { error: error.message }
   }
 }

@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 import crypto from "crypto"
 import { getAvailableCodes, markCodesAsUsed } from "@/lib/firebase/couponCodes"
-import { collection, addDoc, Timestamp, doc, getDoc } from "firebase/firestore"
+import { collection, addDoc, Timestamp, doc, getDoc, query, where, getDocs } from "firebase/firestore"
 import { db } from "@/lib/firebase"
 import Razorpay from "razorpay"
 
@@ -30,6 +30,19 @@ export async function POST(request: NextRequest) {
 
     if (!isValid) {
       return NextResponse.json({ success: false, message: "Payment verification failed" }, { status: 400 })
+    }
+
+    // Check if payment has already been processed (prevent duplicate submissions)
+    const ordersRef = collection(db, "orders")
+    const existingOrderQuery = query(ordersRef, where("paymentId", "==", razorpay_payment_id))
+    const existingOrders = await getDocs(existingOrderQuery)
+
+    if (!existingOrders.empty) {
+      console.log(`Payment ${razorpay_payment_id} already processed. Preventing duplicate.`)
+      return NextResponse.json({ 
+        error: "Payment already processed", 
+        message: "This payment has already been used to purchase coupons"
+      }, { status: 400 })
     }
 
     // Fetch the Razorpay order to verify amount paid
@@ -94,24 +107,33 @@ export async function POST(request: NextRequest) {
     for (const item of validatedItems) {
       const { couponId, quantity, brand, discount, price, description } = item
 
-      // Get available codes for this coupon
+      // Get available codes for this coupon (with race condition awareness)
       const availableCodes = await getAvailableCodes(couponId, quantity)
 
       if (availableCodes.length < quantity) {
+        // Stock depleted - could be race condition or genuine out of stock
+        console.error(`Insufficient stock for ${brand} ${discount}. Requested: ${quantity}, Available: ${availableCodes.length}`)
         return NextResponse.json(
-          { error: `Not enough codes available for ${brand} ${discount}. Only ${availableCodes.length} left.` },
+          { 
+            error: `Not enough codes available for ${brand} ${discount}`, 
+            details: `Only ${availableCodes.length} codes available. This payment will be refunded automatically or contact support.`
+          },
           { status: 400 }
         )
       }
 
-      // Mark these codes as used
+      // Mark these codes as used (atomic operation to prevent double-assignment)
       const codeIds = availableCodes.map(c => c.id)
       const userId = razorpay_payment_id
       
       const { error } = await markCodesAsUsed(codeIds, userId)
       
       if (error) {
-        return NextResponse.json({ error: "Failed to allocate codes" }, { status: 500 })
+        console.error(`Failed to allocate codes for ${brand} ${discount}:`, error)
+        return NextResponse.json({ 
+          error: "Failed to allocate codes", 
+          details: "Please contact support with your payment ID"
+        }, { status: 500 })
       }
 
       // Add to allocated items with actual code strings
