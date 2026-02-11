@@ -48,11 +48,21 @@ export function RazorpayPayment({ amount, items, onPaymentInitiated, onSuccess }
     try {
       console.log("Creating Razorpay order for amount:", amount)
       
+      // Prepare items with couponId for server
+      const itemsForServer = items.map(item => ({
+        couponId: item.id,
+        quantity: item.quantity,
+        brand: item.brand,
+        discount: item.discount,
+        description: item.description,
+        price: item.price
+      }))
+      
       // Create order on server
       const response = await fetch("/api/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount, items }),
+        body: JSON.stringify({ items: itemsForServer }),
       })
 
       const data = await response.json()
